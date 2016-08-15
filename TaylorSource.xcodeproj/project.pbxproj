@@ -431,12 +431,14 @@
 		650265B91C8E36CD0003ECB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		650265BA1C8E36CD0003ECB9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

@@ -21,7 +21,7 @@ public protocol ReusableView: ReusableElement {
 Utility function to instanctiate a view.
 */
 public func loadReusableViewFromNib<T: UIView where T: ReusableView>(owner: AnyObject? = .None, options: [NSObject: AnyObject]? = .None) -> T? {
-    return NSBundle(forClass: T.self).loadNibNamed(T.reuseIdentifier, owner: owner, options: options).last as? T
+    return NSBundle(forClass: T.self).loadNibNamed(T.reuseIdentifier, owner: owner, options: options)?.last as? T
 }
 
 /**

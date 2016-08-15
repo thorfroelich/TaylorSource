@@ -4,7 +4,7 @@ import CoreData
 public protocol FetchedResultsControllerType {
     var delegate: NSFetchedResultsControllerDelegate? { get set }
     var sections: [NSFetchedResultsSectionInfo]? { get }
-    func objectAtIndexPath(_ indexPath: NSIndexPath) -> AnyObject
+    func objectAtIndexPath(_ indexPath: NSIndexPath) -> NSFetchRequestResult
 }
 
 extension NSFetchedResultsController: FetchedResultsControllerType {}
