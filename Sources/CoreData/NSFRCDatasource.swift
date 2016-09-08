@@ -63,11 +63,8 @@ Factory.SupplementaryIndexType == NSFRCSupplementaryIndex>: DatasourceType {
     }
 
     public func viewForSupplementaryElementInView(view: Factory.ViewType, kind: SupplementaryElementKind, atIndexPath indexPath: NSIndexPath) -> Factory.SupplementaryViewType? {
-        if
-            let section = fetchedResultsController.sections?[indexPath.section],
-            let title = section.indexTitle
-        {
-            let index = NSFRCSupplementaryIndex(group: title, indexPath: indexPath)
+        if let section = fetchedResultsController.sections?[indexPath.section] {
+            let index = NSFRCSupplementaryIndex(group: section.name, indexPath: indexPath)
             return factory.supplementaryViewForKind(kind, inView: view, atIndex: index)
         }
         return nil
