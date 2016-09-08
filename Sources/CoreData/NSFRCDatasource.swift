@@ -5,6 +5,7 @@ public protocol FetchedResultsControllerType {
     var delegate: NSFetchedResultsControllerDelegate? { get set }
     var sections: [NSFetchedResultsSectionInfo]? { get }
     func objectAtIndexPath(_ indexPath: NSIndexPath) -> AnyObject
+    func indexPathForObject(_ object: AnyObject) -> NSIndexPath?
 }
 
 extension NSFetchedResultsController: FetchedResultsControllerType {}
@@ -53,6 +54,13 @@ Factory.SupplementaryIndexType == NSFRCSupplementaryIndex>: DatasourceType {
         return nil
     }
 
+    public func indexPathForItem(item: Factory.ItemType) -> NSIndexPath? {
+        if let item = item as? AnyObject {
+            return fetchedResultsController.indexPathForObject(item)
+        }
+        return nil
+    }
+
     public func cellForItemInView(view: Factory.ViewType, atIndexPath indexPath: NSIndexPath) -> Factory.CellType {
         let selected = selectionManager.enabled && selectionManager.contains(indexPath)
         if let item = itemAtIndexPath(indexPath) {
@@ -63,11 +71,8 @@ Factory.SupplementaryIndexType == NSFRCSupplementaryIndex>: DatasourceType {
     }
 
     public func viewForSupplementaryElementInView(view: Factory.ViewType, kind: SupplementaryElementKind, atIndexPath indexPath: NSIndexPath) -> Factory.SupplementaryViewType? {
-        if
-            let section = fetchedResultsController.sections?[indexPath.section],
-            let title = section.indexTitle
-        {
-            let index = NSFRCSupplementaryIndex(group: title, indexPath: indexPath)
+        if let section = fetchedResultsController.sections?[indexPath.section] {
+            let index = NSFRCSupplementaryIndex(group: section.name, indexPath: indexPath)
             return factory.supplementaryViewForKind(kind, inView: view, atIndex: index)
         }
         return nil
