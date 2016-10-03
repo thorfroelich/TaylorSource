@@ -21,6 +21,10 @@ extension UITableView: IndexedUpdateProcessing {
 
     public var updateProcessor: IndexedUpdateProcessor {
         return { [weak self] update in
+            guard let _ = self?.window else {
+                self?.reloadData()
+                return
+            }
             switch update {
             case .DeltaUpdate(let insertedSections, let deletedSections, let insertedRows, let updatedRows, let deletedRows):
                 self?.beginUpdates()
@@ -41,6 +45,10 @@ extension UICollectionView: IndexedUpdateProcessing {
 
     public var updateProcessor: IndexedUpdateProcessor {
         return { [weak self] update in
+            guard let _ = self?.window else {
+                self?.reloadData()
+                return
+            }
             switch update {
             case .DeltaUpdate(let insertedSections, let deletedSections, let insertedRows, let updatedRows, let deletedRows):
                 guard let strongSelf = self else { return }
