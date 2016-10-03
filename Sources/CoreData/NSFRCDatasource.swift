@@ -5,7 +5,7 @@ public protocol FetchedResultsControllerType {
     var delegate: NSFetchedResultsControllerDelegate? { get set }
     var sections: [NSFetchedResultsSectionInfo]? { get }
     func objectAtIndexPath(_ indexPath: NSIndexPath) -> NSFetchRequestResult
-    func indexPathForObject(_ object: AnyObject) -> NSIndexPath?
+    func indexPathForObject(_ object: NSFetchRequestResult) -> NSIndexPath?
 }
 
 extension NSFetchedResultsController: FetchedResultsControllerType {}
@@ -55,7 +55,7 @@ Factory.SupplementaryIndexType == NSFRCSupplementaryIndex>: DatasourceType {
     }
 
     public func indexPathForItem(item: Factory.ItemType) -> NSIndexPath? {
-        if let item = item as? AnyObject {
+        if let item = item as? NSFetchRequestResult {
             return fetchedResultsController.indexPathForObject(item)
         }
         return nil
